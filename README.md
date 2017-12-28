@@ -9,7 +9,7 @@ In this project you can find examples of the Lambda Framework usage.
 - `template.yaml`: the SAM template file. It's needed to run AWS Lambda functions locally.
 - `src/example/README.md`: inside each example folder, there is a README file explaining the intention of it.
 
-## Scripts
+## Scripts
 
 - `npm test`: There is no tests, so test script only check the lint rules.
 - `npm compile`: It compiles the source files into the folder *dist*.
