@@ -1,0 +1,44 @@
+{
+  "name": "lambda-framework-examples",
+  "version": "1.0.0",
+  "description": "Examples of using Lambda Framework.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rogelio-o/lambda-framework-examples.git"
+  },
+  "scripts": {
+    "clean": "rm -rf dist",
+    "precompile": "npm run clean",
+    "compile": "tsc",
+    "test": "npm run lint",
+    "lint": "tslint --config tslint.json --project tsconfig.json"
+  },
+  "keywords": [
+    "serverless",
+    "framework",
+    "lambda",
+    "examples"
+  ],
+  "author": "Rogelio Orts",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rogelio-o/lambda-framework-examples/issues"
+  },
+  "homepage": "https://github.com/rogelio-o/lambda-framework-examples#readme",
+  "devDependencies": {
+    "tslint": "^5.8.0",
+    "tslint-microsoft-contrib": "^5.0.1",
+    "typescript": "^2.6.2"
+  },
+  "dependencies": {
+    "@google-cloud/datastore": "^1.3.3",
+    "@types/node": "^8.0.28",
+    "aws-sdk": "^2.175.0",
+    "lambda-framework": "^1.1.0",
+    "lambda-framework-aws": "^1.0.1",
+    "lambda-framework-dustjs": "^1.0.0",
+    "lambda-framework-gcloud": "^1.0.0",
+    "redis": "^2.8.0",
+    "uuid": "^3.1.0"
+  }
+}

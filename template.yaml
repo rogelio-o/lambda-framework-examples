@@ -1,0 +1,66 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Resources:
+  aws-api:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: dist/src/aws-api/index.handle
+      Runtime: nodejs6.10
+      Events:
+        get2:
+          Type: Api
+          Properties:
+            Path: /aws-api/{proxy+}
+            Method: GET
+        get:
+          Type: Api
+          Properties:
+            Path: /aws-api/{proxy+}/{proxy+}
+            Method: GET
+        post:
+          Type: Api
+          Properties:
+            Path: /aws-api/{proxy+}
+            Method: POST
+        delete:
+          Type: Api
+          Properties:
+            Path: /aws-api/{proxy+}/{proxy+}
+            Method: DELETE
+        update:
+          Type: Api
+          Properties:
+            Path: /aws-api/{proxy+}/{proxy+}
+            Method: PUT
+  aws-web:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: dist/src/aws-web/index.handle
+      Runtime: nodejs6.10
+      Events:
+        get:
+          Type: Api
+          Properties:
+            Path: /aws-web/{proxy+}
+            Method: GET
+        get2:
+          Type: Api
+          Properties:
+            Path: /aws-web
+            Method: GET
+        post:
+          Type: Api
+          Properties:
+            Path: /aws-web/{proxy+}
+            Method: POST
+  aws-event:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: dist/aws-event/index.handler
+      Runtime: node.js6.10
+      Events:
+        CreateThumbnailEvent:
+          Type: S3
+          Properties:
+            Bucket: test-bucket
+            Events: s3:ObjectCreated:*
