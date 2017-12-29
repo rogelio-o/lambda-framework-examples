@@ -56,8 +56,9 @@ Resources:
   aws-event:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: dist/aws-event/index.handler
-      Runtime: node.js6.10
+      Handler: dist/src/aws-event/index.handle
+      Runtime: nodejs6.10
+      Timeout: 60
       Events:
         CreateThumbnailEvent:
           Type: S3
