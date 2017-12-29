@@ -1,4 +1,4 @@
-import { Cookie, ICookie, IHttpRequest, IHttpResponse } from "lambda-framework";
+import { IHttpRequest, IHttpResponse } from "lambda-framework";
 import Session from "./../components/Session";
 
 export default class AuthController {

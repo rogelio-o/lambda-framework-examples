@@ -8,7 +8,7 @@
          * or are recommended in the Microsoft Secure Development Lifecycle (SDL)
          */
         "no-banned-terms": true,
-        "no-cookies": true,
+        "no-cookies": false,
         "no-delete-expression": true,
         "no-disable-auto-sanitization": true,
         "no-document-domain": true,
