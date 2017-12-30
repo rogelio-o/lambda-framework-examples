@@ -6,9 +6,25 @@ import * as uuid from "uuid";
 
 const gm = originalGm.subClass({ imageMagick: true });
 
-const storage: Storage = new Storage();
+const storage: Storage = new Storage({ projectId: "test-lambda-framework" });
 const MAX_WIDTH  = 100;
 const MAX_HEIGHT = 100;
+
+const uploadFile = (bucketName: string, fileName: string, contentType: string, buffer: Buffer): Promise<void> => {
+  return new Promise<void>((resolve, reject) => {
+    const bucket = storage.bucket(bucketName);
+    const file = bucket.file(fileName);
+
+    const stream = file.createWriteStream({
+      metadata: { contentType }
+    });
+
+    stream.on("error", (err) => reject(err));
+    stream.on("finish", () => resolve());
+
+    stream.end(buffer);
+  });
+};
 
 export default function thumbnailsHandler(req: IEventRequest, mainNext: INext): void {
   const data = req.event.original.data;
@@ -44,7 +60,7 @@ export default function thumbnailsHandler(req: IEventRequest, mainNext: INext): 
           .bucket(data.bucket)
           .file(srcKey)
           .download()
-          .then((buffer) => next(null, buffer))
+          .then((file) => next(null, file[0]))
           .catch((err) => next(err));
       },
       (response: Buffer, next: (err: Error, contentType?: string, buffer?: Buffer) => void): void => {
@@ -52,30 +68,32 @@ export default function thumbnailsHandler(req: IEventRequest, mainNext: INext): 
 
         const image = gm(response);
         image.size((err: Error, size: { width: number, height: number }): void => {
-          const scalingFactor = Math.min(
-            MAX_WIDTH / size.width,
-            MAX_HEIGHT / size.height
-          );
-          const width  = scalingFactor * size.width;
-          const height = scalingFactor * size.height;
+          if (err) {
+            next(err);
+          } else {
+            const scalingFactor = Math.min(
+              MAX_WIDTH / size.width,
+              MAX_HEIGHT / size.height
+            );
+            const width  = scalingFactor * size.width;
+            const height = scalingFactor * size.height;
 
-          image
-            .resize(width, height)
-            .toBuffer(imageType, (err2: Error, buffer: Buffer) => {
-              if (err2) {
-                next(err2);
-              } else {
-                next(null, data.contentType, buffer);
-              }
-            });
+            image
+              .resize(width, height)
+              .toBuffer(imageType, (err2: Error, buffer: Buffer) => {
+                if (err2) {
+                  next(err2);
+                } else {
+                  next(null, data.contentType, buffer);
+                }
+              });
+          }
         });
       },
       (contentType: string, imageData: Buffer, next: (err: Error) => void): void => {
         console.log("[" + eventID + "] Uploading Cloud Storage object.");
 
-        storage
-          .bucket(dstBucket)
-          .upload(imageData, { destination: dstKey })
+        uploadFile(dstBucket, dstKey, contentType, imageData)
           .then(() => next(null))
           .catch((err) => next(err));
       }

@@ -52,22 +52,26 @@ export default function thumbnailsHandler(req: IEventRequest, mainNext: INext): 
 
         const image = gm(response.Body);
         image.size((err: Error, size: { width: number, height: number }): void => {
-          const scalingFactor = Math.min(
-            MAX_WIDTH / size.width,
-            MAX_HEIGHT / size.height
-          );
-          const width  = scalingFactor * size.width;
-          const height = scalingFactor * size.height;
+          if (err) {
+            next(err);
+          } else {
+            const scalingFactor = Math.min(
+              MAX_WIDTH / size.width,
+              MAX_HEIGHT / size.height
+            );
+            const width  = scalingFactor * size.width;
+            const height = scalingFactor * size.height;
 
-          image
-            .resize(width, height)
-            .toBuffer(imageType, (err2: Error, buffer: Buffer) => {
-              if (err2) {
-                next(err2);
-              } else {
-                next(null, response.ContentType, buffer);
-              }
-            });
+            image
+              .resize(width, height)
+              .toBuffer(imageType, (err2: Error, buffer: Buffer) => {
+                if (err2) {
+                  next(err2);
+                } else {
+                  next(null, response.ContentType, buffer);
+                }
+              });
+            }
         });
       },
       (contentType: string, data: Buffer, next: (err: AWS.AWSError, output: AWS.S3.PutObjectOutput) => void): void => {
