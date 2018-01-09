@@ -4,7 +4,7 @@
   "description": "Examples of using Lambda Framework.",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rogelio-o/lambda-framework-examples.git"
+    "url": "https://github.com/rogelio-o/lambda-framework-examples.git"
   },
   "scripts": {
     "clean": "rm -rf dist",
