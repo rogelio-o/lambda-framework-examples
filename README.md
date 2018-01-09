@@ -16,25 +16,22 @@ In this project you can find examples of the Lambda Framework usage.
 
 ## How to run it locally?
 
-First of all, you need compile it with the previously referred command.
+First of all, you need compile it with the previously referred command. Then,
+follow the instructions in the README of each example.
 
 ### AWS Examples
 
-TODO
-
-```
-sudo ifconfig lo0 alias 172.16.123.1
-```
-
-```
-java -Djava.library.path/DynamoDBLocal_lib -jar DynamoDBLocal.jar -sharedDb
-```
-
-
+- __AWS-API:__ A simple RESTful API to manage the users pets.
+- __AWS-EVENT:__ event handler which listens when a image is added in
+a S3 bucket and creates a thumbnails of it.
+- __AWS-WEB:__ A simple login website. It uses sessions and cookies.
 
 ### Cloud Functions Examples
 
-TODO
+- __GCLOUD-API:__ A simple RESTful API to manage the users pets.
+- __GCLOUD-EVENT:__ event handler which listens when a image is added in
+a Cloud Storage bucket and creates a thumbnails of it.
+- __GCLOUD-WEB:__ A simple login website. It uses sessions and cookies.
 
 ## Lambda Framework projects
 

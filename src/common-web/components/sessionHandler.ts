@@ -23,7 +23,7 @@ export default function sessionHandler(req: IHttpRequest, res: IHttpResponse, ne
   const sessionCookie: ICookie = req.cookie("session");
 
   if (sessionCookie && sessionCookie.value) {
-    const redisClient: redis.Client = redis.createClient("//172.16.123.1:6379");
+    const redisClient: redis.Client = redis.createClient(process.env.REDIS_CONN_STR);
     redisClient.get("SESSION_" + sessionCookie.value, (err, reply) => {
       redisClient.end(true);
 
