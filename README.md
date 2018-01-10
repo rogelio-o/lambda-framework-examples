@@ -39,8 +39,6 @@ a Cloud Storage bucket and creates a thumbnails of it.
 - [AWS Lambda implementation](https://github.com/rogelio-o/lambda-framework-aws)
 - [Google Cloud Functions implementation](https://github.com/rogelio-o/lambda-framework-gcloud)
 - [DustJS template engine implementation](https://github.com/rogelio-o/lambda-framework-dustjs)
-- [Website](https://github.com/rogelio-o/lambda-framework-website)
-- [Website Resources](https://github.com/rogelio-o/lambda-framework-website-resources)
 - [Examples](https://github.com/rogelio-o/lambda-framework-examples)
 
 ## Contributions
