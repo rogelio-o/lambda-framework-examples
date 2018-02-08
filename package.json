@@ -1,6 +1,6 @@
 {
   "name": "lambda-framework-examples",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Examples of using Lambda Framework.",
   "repository": {
     "type": "git",
@@ -37,10 +37,10 @@
     "async": "^2.6.0",
     "aws-sdk": "^2.175.0",
     "gm": "^1.23.1",
-    "lambda-framework": "^1.1.1",
-    "lambda-framework-aws": "^1.1.0",
-    "lambda-framework-dustjs": "^1.1.0",
-    "lambda-framework-gcloud": "^1.1.0",
+    "lambda-framework": "^1.2.0",
+    "lambda-framework-aws": "^1.2.0",
+    "lambda-framework-dustjs": "^1.2.0",
+    "lambda-framework-gcloud": "^1.2.0",
     "redis": "^2.8.0",
     "uuid": "^3.1.0"
   }
